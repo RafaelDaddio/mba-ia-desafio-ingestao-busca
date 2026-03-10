@@ -10,7 +10,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 load_dotenv()
 
 PDF_PATH = os.getenv("PDF_PATH")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "text-embedding-3-small")
+OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 PG_VECTOR_COLLECTION_NAME = os.getenv("PG_VECTOR_COLLECTION_NAME")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -44,7 +44,7 @@ def ingest_pdf():
     ids = [f"doc-{i}" for i in range(len(enriched_splits))]
 
     embeddings = OpenAIEmbeddings(
-        model=OPENAI_MODEL
+        model=OPENAI_EMBEDDING_MODEL
     )
 
     store = PGVector(
